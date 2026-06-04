@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 2 - Lectura en voz alta, dicción y fluidez</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .presentation-container {
+            max-width: 1200px;
+            width: 100%;
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+            overflow: hidden;
+        }
+
+        .slide {
+            display: none;
+            padding: 50px 60px;
+            animation: fadeIn 0.5s ease;
+            min-height: 550px;
+            background: white;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: #1e293b;
+            margin-bottom: 25px;
+            border-left: 5px solid #667eea;
+            padding-left: 20px;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            color: #334155;
+            margin: 20px 0 15px 0;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 25px 0;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .card {
+            background: #f8fafc;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h4 {
+            font-size: 1.2rem;
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .pilar-card {
+            background: linear-gradient(135deg, #667eea10, #764ba210);
+            border-left: 4px solid #667eea;
+        }
+
+        .tongue-twister {
+            background: #1e293b;
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .tongue-twister:hover {
+            background: #0f172a;
+            transform: scale(1.02);
+        }
+
+        .resonador-card {
+            text-align: center;
+            background: #e0f2fe;
+            border-radius: 15px;
+            padding: 15px;
+        }
+
+        .intencion-tabla {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .intencion-item {
+            background: #f1f5f9;
+            border-radius: 10px;
+            padding: 10px;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .activacion-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .activacion-card h3 {
+            color: white;
+            margin-bottom: 15px;
+        }
+        
+        .btn-youtube {
+            display: inline-block;
+            background: #ff0000;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-top: 20px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-youtube:hover {
+            background: #cc0000;
+            transform: scale(1.05);
+        }
+
+        .btn-video {
+            display: inline-block;
+            background: #ff0000;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+        .btn-video:hover {
+            background: #cc0000;
+            transform: scale(1.02);
+        }
+
+        .btn-relato {
+            display: inline-block;
+            background: #8b5cf6;
+            color: white;
+            padding: 12px 15px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.8rem;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            width: 100%;
+            text-align: center;
+        }
+        .btn-relato:hover {
+            background: #7c3aed;
+            transform: scale(1.02);
+        }
+
+        .qr-container {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .qr-code {
+            background: white;
+            padding: 15px;
+            border-radius: 15px;
+            display: inline-block;
+        }
+
+        .timer-container {
+            text-align: center;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 30px;
+            padding: 40px;
+            margin: 20px 0;
+        }
+        .timer-display {
+            font-size: 5rem;
+            font-weight: 700;
+            color: white;
+            font-family: monospace;
+            letter-spacing: 5px;
+            margin: 20px 0;
+        }
+        .timer-label {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 10px;
+        }
+        .btn-timer {
+            background: white;
+            color: #667eea;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 5px;
+            transition: all 0.3s;
+        }
+        .btn-timer:hover {
+            transform: scale(1.05);
+            background: #f1f5f9;
+        }
+        .alerta {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 10px;
+            display: none;
+        }
+        .alerta.show {
+            display: block;
+            animation: pulse 1s ease;
+            background: #fef9c3;
+            color: #854d0e;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .checklist-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+        }
+        .checklist-table th {
+            background: #667eea;
+            color: white;
+            padding: 12px;
+            text-align: center;
+            font-weight: 600;
+            border: 1px solid #5a67d8;
+        }
+        .checklist-table td {
+            border: 1px solid #e2e8f0;
+            padding: 12px;
+            text-align: left;
+        }
+        .checklist-table td:first-child {
+            text-align: left;
+        }
+        .checklist-table td:not(:first-child) {
+            text-align: center;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        li::before {
+            content: "✓";
+            color: #667eea;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            background: #f1f5f9;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        button {
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-prev, .btn-next {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-prev:hover, .btn-next:hover {
+            background: #5a67d8;
+        }
+
+        .btn-prev:disabled, .btn-next:disabled {
+            background: #cbd5e1;
+            cursor: not-allowed;
+        }
+
+        .dots {
+            display: flex;
+            gap: 10px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #cbd5e1;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .dot.active {
+            background: #667eea;
+            width: 25px;
+            border-radius: 10px;
+        }
+
+        .slide-counter {
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            margin-bottom: 15px;
+        }
+
+        .voice-icon {
+            font-size: 3rem;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .quote {
+            font-size: 1.2rem;
+            font-style: italic;
+            color: #475569;
+            text-align: center;
+            padding: 25px;
+            background: #f1f5f9;
+            border-radius: 20px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 30px 20px;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+            .grid-2, .grid-3, .intencion-tabla {
+                grid-template-columns: 1fr;
+            }
+            .nav-bar {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .timer-display {
+                font-size: 3rem;
+            }
+            .checklist-table th, .checklist-table td {
+                font-size: 0.8rem;
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <!-- Slide 1 - Portada -->
+        <div class="slide active" id="slide1">
+            <div class="voice-icon">🎤🗣️</div>
+            <h1>Sesión 2<br>Lectura en voz alta, dicción y fluidez</h1>
+            <div class="badge">4 de junio 2026 | 4 horas</div>
+            <div class="badge" style="background: #764ba2;">Facilitadora: Elba Edith Ramírez Bañuelos</div>
+            <div class="quote" style="margin-top: 30px;">
+                "La voz es el instrumento más poderoso del docente. Hoy aprenderemos a afinarlo."
+            </div>
+        </div>
+
+        <!-- Slide 2 - Activación corporal y vocal -->
+        <div class="slide" id="slide2">
+            <span class="badge">Calentamiento</span>
+            <h2>🎵 Activación corporal y vocal</h2>
+            <div class="activacion-card">
+                <h3>📢 Prepárate para leer en voz alta</h3>
+                <p>Esta lista de reproducción contiene 14 ejercicios prácticos para calentar la voz, respirar correctamente y activar la articulación antes de cualquier lectura en voz alta.</p>
+                <button class="btn-youtube" onclick="window.open('https://youtube.com/playlist?list=PLku4aWQZ35tx5cccYo9WpIVYxnuB8Ihxr&si=jv5bONbkWsOkBMpd', '_blank')">
+                    ▶️ Reproducir lista completa
+                </button>
+                <p style="margin-top: 20px; font-size: 0.8rem; opacity: 0.8;">Ejercicios incluidos: respiración diafragmática, relajación de mandíbula, calentamiento de labios y lengua, proyección vocal.</p>
+            </div>
+            <div class="card" style="margin-top: 15px;">
+                <h4>🎯 Ejercicio rápido (5 min)</h4>
+                <ul>
+                    <li>Respiración diafragmática: inhala 4 segundos, sostén 4, exhala 6-8 con "ssss"</li>
+                    <li>Relajación de mandíbula: bostezos fingidos y masaje suave</li>
+                    <li>Calentamiento de labios y lengua: "pa-pa-pa", "ta-ta-ta", "la-le-li-lo-lu"</li>
+                    <li>Proyección suave: "mmmm" ascendente y descendente</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 3 - Ejercicio 1: Respiración intercostal (Duvauchelle) -->
+        <div class="slide" id="slide3">
+            <span class="badge">Ejercicio práctico (Duvauchelle)</span>
+            <h2>🌬️ Respiración intercostal</h2>
+            <div class="card">
+                <h4>🎯 Objetivo</h4>
+                <p>Corregir la respiración alta (clavicular) y activar el apoyo diafragmático.</p>
+            </div>
+            <div class="grid-2">
+                <div class="card">
+                    <h4>📋 Autoevaluación</h4>
+                    <ul>
+                        <li>Coloca una mano en el pecho y otra en el abdomen</li>
+                        <li>Respira normal: ¿qué mano se mueve más?</li>
+                        <li>Si es la del pecho → respiración alta (incorrecta)</li>
+                        <li>Corrige: el aire debe descender hacia la zona baja</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>💨 Práctica (5 respiraciones)</h4>
+                    <ul>
+                        <li>Inhala por nariz (4 segundos)</li>
+                        <li>Sostén (2 segundos)</li>
+                        <li>Exhala por boca con "ssss" (6-8 segundos)</li>
+                        <li>La mano del abdomen se expande; la del pecho, quieta</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="quote">
+                💡 "Si observas que tu respiración sube nuevamente a las puntas de los pulmones, no lo permitas. Corrige de inmediato" — Humberto Duvauchelle
+            </div>
+        </div>
+
+        <!-- Slide 4 - Ejercicio 2: El espejo y la pluma (Duvauchelle) -->
+        <div class="slide" id="slide4">
+            <span class="badge">Ejercicio práctico (Duvauchelle)</span>
+            <h2>🪶 El espejo y la pluma</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <h4>🪞 El espejo</h4>
+                    <ul>
+                        <li>Imagina un espejo en la palma de tu mano</li>
+                        <li>"Empáñalo" suavemente con tu aliento</li>
+                        <li>Repite 5 veces con pausa breve entre cada soplo</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>🪶 La pluma</h4>
+                    <ul>
+                        <li>Imagina una pluma posada sobre tus labios</li>
+                        <li>Sopla suavemente para mantenerla suspendida</li>
+                        <li>Apoya el soplo con el abdomen (no con el pecho)</li>
+                        <li>Mantén la pluma en el aire 3-5 segundos</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="quote">
+                💡 "La fuerza de la salida del aire será mayor, coordinada y más larga. La tonicidad se asemeja al impulso diafragmático al hablar" — Humberto Duvauchelle
+            </div>
+        </div>
+
+        <!-- Slide 5 - Los 5 pilares de la lectura en voz alta -->
+        <div class="slide" id="slide5">
+            <span class="badge">Fundamento técnico</span>
+            <h2>Los 5 pilares de la lectura en voz alta</h2>
+            <div class="grid-2">
+                <div class="card pilar-card">
+                    <h4>🌬️ 1. Respiración</h4>
+                    <p>La respiración diafragmática da soporte a la voz y evita la fatiga. Respirar en comas y puntos.</p>
+                </div>
+                <div class="card pilar-card">
+                    <h4>👄 2. Articulación</h4>
+                    <p>Pronunciar cada sonido con claridad. No "comerse" letras ni sílabas.</p>
+                </div>
+                <div class="card pilar-card">
+                    <h4>🎵 3. Entonación</h4>
+                    <p>Variar el tono para dar sentido y emoción. Evitar la monotonía.</p>
+                </div>
+                <div class="card pilar-card">
+                    <h4>⏱️ 4. Ritmo</h4>
+                    <p>Velocidad adecuada: ni muy rápido (se pierde claridad), ni muy lento (aburre).</p>
+                </div>
+                <div class="card pilar-card">
+                    <h4>🔇 5. Pausas y silencios</h4>
+                    <p>El silencio también comunica. Pausa en comas, pausa más larga en puntos.</p>
+                </div>
+            </div>
+            <div class="quote">
+                📖 "El mismo texto, leído de dos maneras diferentes, puede transmitir dos mensajes completamente distintos."
+            </div>
+        </div>
+
+        <!-- Slide 6 - Ejemplo comparativo -->
+        <div class="slide" id="slide6">
+            <span class="badge">Demostración</span>
+            <h2>¿Cómo suena una buena lectura?</h2>
+            <div class="grid-2">
+                <div class="card" style="background: #fee2e2;">
+                    <h4>❌ Lectura incorrecta</h4>
+                    <p><em>"Elaulaestabaensilencio.Losalumnosmirabanalfrente.Lamaestrasonrióydijo:'Hoyvamosahaceralgodiferente'."</em></p>
+                    <p style="margin-top: 15px;"><strong>Problemas:</strong> Sin pausas, ritmo acelerado, entonación plana, sin respiración.</p>
+                </div>
+                <div class="card" style="background: #dcfce7;">
+                    <h4>✅ Lectura correcta</h4>
+                    <p><em>"El aula estaba en silencio. (pausa) Los alumnos miraban al frente. (pausa) La maestra sonrió y dijo: (pausa breve) 'Hoy vamos a hacer algo diferente'."</em></p>
+                    <p style="margin-top: 15px;"><strong>Aciertos:</strong> Pausas en puntos, entonación ascendente en la cita, ritmo adecuado.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7 - Preguntas disparadoras -->
+        <div class="slide" id="slide7">
+            <span class="badge">Reflexión grupal</span>
+            <h2>Preguntas para pensar</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <h4>🤔 Sobre nuestra propia voz</h4>
+                    <ul>
+                        <li>¿Alguna vez han sentido que se quedan sin aire al hablar o leer en voz alta?</li>
+                        <li>¿Qué palabras o sonidos se les dificultan más al articular?</li>
+                        <li>¿Qué efecto tiene un tono monótono en los alumnos?</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>🎯 Sobre la práctica docente</h4>
+                    <ul>
+                        <li>¿Qué pasa cuando hablamos muy rápido en clase? ¿Y muy lento?</li>
+                        <li>¿Qué efecto creen que tiene una pausa larga antes de decir algo importante?</li>
+                        <li>Si tuvieran que elegir UN pilar para mejorar esta semana, ¿cuál elegirían?</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8 - Ejercicio 3: Gimnasia de lengua (Duvauchelle) -->
+        <div class="slide" id="slide8">
+            <span class="badge">Ejercicio práctico (Duvauchelle)</span>
+            <h2>👅 Gimnasia de lengua</h2>
+            <div class="card">
+                <h4>🎯 Objetivo</h4>
+                <p>Flexibilizar la lengua y adelantar la voz hacia la máscara (zona de resonancia facial).</p>
+            </div>
+            <div class="grid-2">
+                <div class="card">
+                    <h4>📌 Tensión y relajación</h4>
+                    <ul>
+                        <li>Adelanta la lengua recta (sin que duela) durante 5-6 segundos</li>
+                        <li>Vuelve lentamente a su posición habitual</li>
+                        <li>Repite 3 veces</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>📐 Figuras geométricas</h4>
+                    <ul>
+                        <li>Con la punta de la lengua, dibuja en el espacio:</li>
+                        <li>◯ Un círculo (ida y vuelta)</li>
+                        <li>◻️ Un rectángulo</li>
+                        <li>▲ Un triángulo (base y vértices)</li>
+                        <li>● Un óvalo</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="quote">
+                💡 "Al hablar normalmente percibirás tu voz adelantada, amplificada en la máscara, con una articulación más relajada, fácil y cómoda" — Humberto Duvauchelle
+            </div>
+        </div>
+
+        <!-- Slide 9 - Gimnasia articulatoria: trabalenguas -->
+        <div class="slide" id="slide9">
+            <span class="badge">Ejercicio práctico</span>
+            <h2>Gimnasia articulatoria</h2>
+            <p style="margin-bottom: 20px;">Repite cada trabalenguas <strong>con un lápiz entre los dientes</strong>, luego <strong>sin él</strong>. Notarás la diferencia.</p>
+            <div class="grid-2">
+                <div class="tongue-twister" onclick="copyToClipboard('Tres tristes tigres tragaban trigo en un trigal')">
+                    📢 "Tres tristes tigres tragaban trigo en un trigal"
+                </div>
+                <div class="tongue-twister" onclick="copyToClipboard('El cielo está enladrillado, ¿quién lo desenladrillará?')">
+                    📢 "El cielo está enladrillado, ¿quién lo desenladrillará?"
+                </div>
+                <div class="tongue-twister" onclick="copyToClipboard('Pablito clavó un clavito. ¿Qué clavito clavó Pablito?')">
+                    📢 "Pablito clavó un clavito. ¿Qué clavito clavó Pablito?"
+                </div>
+                <div class="tongue-twister" onclick="copyToClipboard('El volcán de Parangaricutirimícuaro se quiere desparangaricutirimicuarizar')">
+                    📢 "El volcán de Parangaricutirimícuaro se quiere desparangaricutirimicuarizar"
+                </div>
+            </div>
+            <div class="quote" style="margin-top: 20px; font-size: 0.9rem;">
+                💡 Haz clic en cualquier trabalenguas para copiarlo. Practica en voz alta.
+            </div>
+        </div>
+
+        <!-- Slide 10 - Ejercicio 4: Onomatopeya "BUMMM" (Duvauchelle) -->
+        <div class="slide" id="slide10">
+            <span class="badge">Ejercicio práctico (Duvauchelle)</span>
+            <h2>💥 La onomatopeya "BUMMM"</h2>
+            <div class="card">
+                <h4>🎯 Objetivo</h4>
+                <p>Amplificar la voz y ubicar la resonancia en la "máscara" (labio superior, pómulos, nariz, senos frontales).</p>
+            </div>
+            <div class="grid-2">
+                <div class="card">
+                    <h4>📌 Preparación</h4>
+                    <ul>
+                        <li>De pie o tendido boca arriba</li>
+                        <li>Labios juntos (no apretados)</li>
+                        <li>Maxilar inferior descendido</li>
+                        <li>"Ahuecar" la boca como si tuvieras una burbuja</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>🔊 Ejecución</h4>
+                    <ul>
+                        <li>Di: <strong>¡¡BUMMM!!</strong> (como en los cómics)</li>
+                        <li>La letra M debe vibrar 4-5 segundos</li>
+                        <li>Mínimo volumen, máxima vibración</li>
+                        <li>Repite 30-40 golpes con el diafragma</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="quote">
+                💡 "La vibración debe sentirse en labio superior, pómulos, nariz, oídos, paladar, frente y parietal (parte alta del cráneo)" — Humberto Duvauchelle
+            </div>
+        </div>
+
+        <!-- Slide 11 - Los tres resonadores -->
+        <div class="slide" id="slide11">
+            <span class="badge">Técnica vocal</span>
+            <h2>Los tres resonadores</h2>
+            <div class="grid-3">
+                <div class="resonador-card">
+                    <h4>💪 Resonador de pecho</h4>
+                    <p>Emitir "mmmm" sintiendo vibración en el pecho.</p>
+                    <p><strong>Efecto:</strong> Autoridad, seriedad, firmeza.</p>
+                </div>
+                <div class="resonador-card">
+                    <h4>🧠 Resonador de cabeza</h4>
+                    <p>Emitir "iiii" sintiendo vibración en la cabeza.</p>
+                    <p><strong>Efecto:</strong> Cercanía, energía, entusiasmo.</p>
+                </div>
+                <div class="resonador-card">
+                    <h4>🎭 Resonador de máscara facial</h4>
+                    <p>Emitir "brrrrr" sintiendo vibración en nariz y labios.</p>
+                    <p><strong>Efecto:</strong> Proyección sin esfuerzo, claridad.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12 - Receso (20 minutos con temporizador) -->
+        <div class="slide" id="slide12">
+            <span class="badge">☕ Descanso</span>
+            <h2>Receso</h2>
+            <div class="timer-container">
+                <div class="timer-label">Tiempo de descanso</div>
+                <div class="timer-display" id="timerDisplay">20:00</div>
+                <div>
+                    <button class="btn-timer" id="startTimerBtn">▶️ Iniciar</button>
+                    <button class="btn-timer" id="resetTimerBtn">🔄 Reiniciar</button>
+                </div>
+                <div id="alerta" class="alerta">
+                    ⏰ ¡El receso ha terminado! Regresamos en 1 minuto.
+                </div>
+            </div>
+            <div class="quote" style="margin-top: 20px;">
+                🍵 Tómate un café, estira las piernas y regresa puntualmente a las 10:50.
+            </div>
+        </div>
+
+        <!-- Slide 13 - Ejercicio 5: El matiz con la palabra "Siéntese" (Duvauchelle) -->
+        <div class="slide" id="slide13">
+            <span class="badge">Ejercicio práctico (Duvauchelle)</span>
+            <h2>🎭 El matiz: "Siéntese"</h2>
+            <div class="card">
+                <h4>🎯 Objetivo</h4>
+                <p>Enriquecer la expresividad y evitar la monotonía al hablar.</p>
+            </div>
+            <div class="intencion-tabla" style="margin-top: 10px;">
+                <div class="intencion-item">😊 Feliz</div>
+                <div class="intencion-item">🥺 Suplicante</div>
+                <div class="intencion-item">👑 Imperativa</div>
+                <div class="intencion-item">😔 Desolada</div>
+                <div class="intencion-item">😠 Gritada</div>
+                <div class="intencion-item">😌 Dulce</div>
+            </div>
+            <div class="card" style="margin-top: 15px;">
+                <h4>🎯 Consejos para transmitir el matiz</h4>
+                <ul>
+                    <li><strong>Feliz:</strong> tono medio-agudo, ritmo rápido, sonrisa implícita</li>
+                    <li><strong>Suplicante:</strong> tono grave, ritmo lento, voz entrecortada</li>
+                    <li><strong>Imperativa:</strong> tono grave y firme, resonador de pecho, pausa antes</li>
+                    <li><strong>Desolada:</strong> tono bajo, ritmo lento, voz apagada</li>
+                    <li><strong>Gritada:</strong> tono elevado, volumen alto (sin forzar)</li>
+                    <li><strong>Dulce:</strong> tono suave, ritmo lento, inclinación hacia adelante</li>
+                </ul>
+            </div>
+            <div class="quote">
+                💡 "Si defines 'lo que se dice' y 'quien lo dice', llegarás a 'cómo se dice' de la manera más natural y entretenida" — Humberto Duvauchelle
+            </div>
+        </div>
+
+        <!-- Slide 14 - Las vocales malditas (QR + 5 relatos) -->
+        <div class="slide" id="slide14">
+            <span class="badge">Texto de práctica</span>
+            <h2>📖 Las vocales malditas</h2>
+            <p style="margin-bottom: 15px;">Óscar de la Borbolla - Cinco relatos donde cada uno usa una sola vocal.</p>
+            
+            <div class="grid-2">
+                <div class="qr-container">
+                    <div class="qr-code" id="qrCode"></div>
+                    <p style="margin-top: 15px; font-size: 0.8rem; color: #64748b;">
+                        Escanea el código QR para acceder<br>al PDF completo
+                    </p>
+                    <button class="btn-youtube" style="background: #10b981; font-size: 0.9rem; margin-top: 10px;" onclick="window.open('https://cantarcatolico.wordpress.com/wp-content/uploads/2014/06/las-vocales-malditas-oscar-de-la-borbolla.pdf', '_blank')">
+                        📄 Abrir PDF completo
+                    </button>
+                </div>
+
+                <div>
+                    <h4 style="color: #667eea; margin-bottom: 15px;">🎭 Selecciona un relato:</h4>
+                    <div style="display: flex; flex-direction: column; gap: 12px;">
+                        <button class="btn-relato" onclick="window.open('https://cantarcatolico.wordpress.com/wp-content/uploads/2014/06/las-vocales-malditas-oscar-de-la-borbolla.pdf#page=5', '_blank')">
+                            🎭 Cantata a Satanás (solo vocal A) - Página 5
+                        </button>
+                        <button class="btn-relato" onclick="window.open('https://cantarcatolico.wordpress.com/wp-content/uploads/2014/06/las-vocales-malditas-oscar-de-la-borbolla.pdf#page=7', '_blank')">
+                            ⛪ El hereje rebelde (solo vocal E) - Página 7
+                        </button>
+                        <button class="btn-relato" onclick="window.open('https://cantarcatolico.wordpress.com/wp-content/uploads/2014/06/las-vocales-malditas-oscar-de-la-borbolla.pdf#page=9', '_blank')">
+                            👙 Mimí sin bikini (solo vocal I) - Página 9
+                        </button>
+                        <button class="btn-relato" onclick="window.open('https://cantarcatolico.wordpress.com/wp-content/uploads/2014/06/las-vocales-malditas-oscar-de-la-borbolla.pdf#page=11', '_blank')">
+                            🤪 Los locos somos otro cosmos (solo vocal O) - Página 11
+                        </button>
+                        <button class="btn-relato" onclick="window.open('https://cantarcatolico.wordpress.com/wp-content/uploads/2014/06/las-vocales-malditas-oscar-de-la-borbolla.pdf#page=13', '_blank')">
+                            🔮 Un gurú vudú (solo vocal U) - Página 13
+                        </button>
+                    </div>
+                    <p style="margin-top: 15px; font-size: 0.75rem; color: #94a3b8; text-align: center;">
+                        💡 Cada relato usa una sola vocal. Ideal para practicar dicción y articulación.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 15 - Lectura con intención -->
+        <div class="slide" id="slide15">
+            <span class="badge">Actividad en parejas</span>
+            <h2>Lectura con intención</h2>
+            <p>Lee el mismo fragmento con diferentes intenciones. Tu compañero debe adivinar cuál es.</p>
+            
+            <button class="btn-video" onclick="window.open('https://www.youtube.com/watch?v=2zlhcRJhCOs&list=PLku4aWQZ35tx5cccYo9WpIVYxnuB8Ihxr&index=11', '_blank')">
+                ▶️ Ver video ejemplo de entonación e intención
+            </button>
+            
+            <div class="intencion-tabla" style="margin-top: 20px;">
+                <div class="intencion-item">😊 Alegría</div>
+                <div class="intencion-item">😢 Tristeza</div>
+                <div class="intencion-item">😠 Enojo</div>
+                <div class="intencion-item">😨 Miedo</div>
+                <div class="intencion-item">😴 Cansancio</div>
+                <div class="intencion-item">😲 Sorpresa</div>
+                <div class="intencion-item">😑 Aburrimiento</div>
+                <div class="intencion-item">👑 Autoridad</div>
+                <div class="intencion-item">🤝 Empatía</div>
+            </div>
+        </div>
+
+        <!-- Slide 16 - Lista de cotejo de autoevaluación -->
+        <div class="slide" id="slide16">
+            <span class="badge">Autoevaluación</span>
+            <h2>Lista de cotejo: ¿Cómo leo?</h2>
+            <p>Graba tu lectura y autoevalúate con esta lista.</p>
+            <table class="checklist-table">
+                <thead>
+                    <tr><th>Criterio</th><th>Logrado</th><th>En proceso</th><th>No logrado</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>La respiración es profunda y no se escucha entre palabra y palabra</td><td>☐</td><td>☐</td><td>☐</td></tr>
+                    <tr><td>Se articulan todas las consonantes (no se comen letras)</td><td>☐</td><td>☐</td><td>☐</td></tr>
+                    <tr><td>La entonación varía (no es monótona)</td><td>☐</td><td>☐</td><td>☐</td></tr>
+                    <tr><td>El ritmo es adecuado (ni muy rápido ni muy lento)</td><td>☐</td><td>☐</td><td>☐</td></tr>
+                    <tr><td>Se hacen pausas en comas y puntos</td><td>☐</td><td>☐</td><td>☐</td></tr>
+                    <tr><td>El volumen es adecuado (se escucha bien sin gritar)</td><td>☐</td><td>☐</td><td>☐</td></tr>
+                    <tr><td>La intención o emoción se transmite</td><td>☐</td><td>☐</td><td>☐</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Slide 17 - Cierre -->
+        <div class="slide" id="slide17">
+            <span class="badge">Para recordar</span>
+            <h2>Práctica diaria recomendada</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <h4>🗓️ Rutina de 5 minutos</h4>
+                    <ul>
+                        <li>Respiración intercostal (1 min)</li>
+                        <li>Gimnasia de lengua (1 min)</li>
+                        <li>Trabalenguas con lápiz (2 min)</li>
+                        <li>Onomatopeya "BUMMM" (1 min)</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>📌 Antes de la Sesión 3</h4>
+                    <ul>
+                        <li>Traer ropa cómoda (trabajaremos lenguaje no verbal)</li>
+                        <li>Revisar Moodle para textos y matrices</li>
+                        <li>Practicar la lectura del cuento antes de grabar</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="quote" style="margin-top: 20px;">
+                🎤✨ "La voz no es un regalo, es un músculo. Se entrena, se cuida y se fortalece con la práctica diaria."
+            </div>
+        </div>
+
+        <!-- Navegación -->
+        <div class="nav-bar">
+            <div class="slide-counter">
+                Diapositiva <span id="currentSlide">1</span> de <span id="totalSlides">17</span>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn-prev" id="prevBtn" disabled>◀ Anterior</button>
+                <button class="btn-next" id="nextBtn">Siguiente ▶</button>
+            </div>
+            <div class="dots" id="dotsContainer"></div>
+        </div>
+    </div>
+
+    <!-- Librería para generar QR -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+    
+    <script>
+        // Generar código QR
+        if(document.getElementById("qrCode")) {
+            new QRCode(document.getElementById("qrCode"), {
+                text: "https://cantarcatolico.wordpress.com/wp-content/uploads/2014/06/las-vocales-malditas-oscar-de-la-borbolla.pdf",
+                width: 150,
+                height: 150,
+                colorDark: "#1e293b",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H
+            });
+        }
+
+        // Temporizador
+        let timerInterval = null;
+        let timeLeft = 20 * 60;
+        let isRunning = false;
+        const timerDisplay = document.getElementById('timerDisplay');
+        const startBtn = document.getElementById('startTimerBtn');
+        const resetBtn = document.getElementById('resetTimerBtn');
+        const alertaDiv = document.getElementById('alerta');
+
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        function updateDisplay() {
+            if (timerDisplay) timerDisplay.textContent = formatTime(timeLeft);
+        }
+
+        function startTimer() {
+            if (timerInterval) clearInterval(timerInterval);
+            isRunning = true;
+            if (alertaDiv) alertaDiv.classList.remove('show');
+            timerInterval = setInterval(() => {
+                if (timeLeft > 0) {
+                    timeLeft--;
+                    updateDisplay();
+                    if (timeLeft === 0) {
+                        clearInterval(timerInterval);
+                        isRunning = false;
+                        if (alertaDiv) alertaDiv.classList.add('show');
+                    }
+                }
+            }, 1000);
+        }
+
+        function resetTimer() {
+            if (timerInterval) clearInterval(timerInterval);
+            timeLeft = 20 * 60;
+            updateDisplay();
+            isRunning = false;
+            if (alertaDiv) alertaDiv.classList.remove('show');
+        }
+
+        if (startBtn) startBtn.addEventListener('click', startTimer);
+        if (resetBtn) resetBtn.addEventListener('click', resetTimer);
+        updateDisplay();
+
+        // Navegación
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const currentSlideSpan = document.getElementById('currentSlide');
+        const totalSlidesSpan = document.getElementById('totalSlides');
+        const dotsContainer = document.getElementById('dotsContainer');
+        
+        let currentIndex = 0;
+        const totalSlides = slides.length;
+        
+        totalSlidesSpan.textContent = totalSlides;
+        
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            if (i === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => goToSlide(i));
+            dotsContainer.appendChild(dot);
+        }
+        
+        const dots = document.querySelectorAll('.dot');
+        
+        function updateSlides() {
+            slides.forEach((slide, index) => {
+                slide.classList.toggle('active', index === currentIndex);
+            });
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentIndex);
+            });
+            currentSlideSpan.textContent = currentIndex + 1;
+            prevBtn.disabled = currentIndex === 0;
+            nextBtn.disabled = currentIndex === totalSlides - 1;
+            
+            // Detener temporizador al salir de la diapositiva de receso
+            if (slides[currentIndex] && slides[currentIndex].id !== 'slide12') {
+                if (timerInterval) clearInterval(timerInterval);
+                isRunning = false;
+            }
+        }
+        
+        function goToSlide(index) {
+            if (index >= 0 && index < totalSlides) {
+                currentIndex = index;
+                updateSlides();
+            }
+        }
+        
+        function nextSlide() {
+            if (currentIndex < totalSlides - 1) {
+                currentIndex++;
+                updateSlides();
+            }
+        }
+        
+        function prevSlide() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateSlides();
+            }
+        }
+        
+        prevBtn.addEventListener('click', prevSlide);
+        nextBtn.addEventListener('click', nextSlide);
+        
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') prevSlide();
+            if (e.key === 'ArrowRight') nextSlide();
+        });
+        
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text);
+            alert('Trabalenguas copiado: "' + text + '"');
+        }
+        
+        window.copyToClipboard = copyToClipboard;
+        
+        updateSlides();
+    </script>
+</body>
+</html>
